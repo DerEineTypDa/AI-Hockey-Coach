@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Hockey Coach</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar">
+        <div class="brand">
+          <div class="brand-icon">AI</div>
+          <div>
+            <strong>AI Hockey Coach</strong>
+            <span>Career Analytics</span>
+          </div>
+        </div>
+
+        <nav class="nav" aria-label="Hauptnavigation">
+          <button class="nav-item active" data-view="dashboard">Dashboard</button>
+          <button class="nav-item" data-view="profile">Spielerprofil</button>
+          <button class="nav-item" data-view="training">Training</button>
+          <button class="nav-item" data-view="career">Karriere</button>
+          <button class="nav-item" data-view="games">Spiele</button>
+          <button class="nav-item" data-view="stats">Statistiken</button>
+          <button class="nav-item" data-view="calendar">Kalender</button>
+        </nav>
+
+        <div class="sidebar-card">
+          <span class="label">Coach Bewertung</span>
+          <strong id="sidebarRating">68</strong>
+          <div class="mini-meter"><span id="sidebarRatingFill"></span></div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <button class="menu-button" id="menuButton" type="button" aria-label="Menü öffnen">☰</button>
+          <div>
+            <p class="eyebrow">Persönlicher KI-Eishockeytrainer</p>
+            <h1 id="pageTitle">Dashboard</h1>
+          </div>
+          <div class="top-actions">
+            <button class="ghost-button" id="eventButton" type="button">Event</button>
+            <button class="primary-button" id="quickTrainButton" type="button">Training +</button>
+          </div>
+        </header>
+
+        <section class="view active" id="dashboard">
+          <div class="hero-panel">
+            <div>
+              <p class="eyebrow">Aktueller Status</p>
+              <h2 id="heroName">Mika Frost</h2>
+              <p id="heroCoach">Dein Coach lädt die Analyse.</p>
+            </div>
+            <div class="hero-score">
+              <span>OVR</span>
+              <strong id="overallScore">68</strong>
+            </div>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="panel profile-summary">
+              <div class="panel-head">
+                <h3>Spieler</h3>
+                <span id="careerBadge">Nachwuchs</span>
+              </div>
+              <div class="summary-list" id="profileSummary"></div>
+            </article>
+
+            <article class="panel">
+              <div class="panel-head">
+                <h3>Tagesziele</h3>
+                <span id="dailyProgress">0/3</span>
+              </div>
+              <div class="goal-list" id="dailyGoals"></div>
+            </article>
+
+            <article class="panel coach-panel">
+              <div class="panel-head">
+                <h3>KI-Coach</h3>
+                <span>Live Analyse</span>
+              </div>
+              <div id="coachAdvice" class="coach-advice"></div>
+            </article>
+
+            <article class="panel">
+              <div class="panel-head">
+                <h3>Scout-Bericht</h3>
+                <span id="scoutGrade">B-</span>
+              </div>
+              <p id="scoutReport" class="report-text"></p>
+            </article>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Attribute</h3>
+              <span>1 bis 100</span>
+            </div>
+            <div class="attribute-grid" id="attributeBars"></div>
+          </div>
+        </section>
+
+        <section class="view" id="profile">
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Spielerprofil</h3>
+              <span>automatisch gespeichert</span>
+            </div>
+            <form class="profile-form" id="profileForm">
+              <label>Name<input id="nameInput" type="text" autocomplete="name" /></label>
+              <label>Alter<input id="ageInput" type="number" min="8" max="45" /></label>
+              <label>Größe cm<input id="heightInput" type="number" min="120" max="230" /></label>
+              <label>Gewicht kg<input id="weightInput" type="number" min="35" max="140" /></label>
+              <label>Position<select id="positionInput">
+                <option>Stürmer</option>
+                <option>Verteidiger</option>
+                <option>Torwart</option>
+              </select></label>
+              <label>Schusshand<select id="handInput">
+                <option>Links</option>
+                <option>Rechts</option>
+              </select></label>
+            </form>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Spielerbewertung</h3>
+              <span id="profileRatingText">Solider Nachwuchs</span>
+            </div>
+            <div class="rating-layout">
+              <div class="rating-circle" id="ratingCircle">68</div>
+              <p id="ratingExplanation"></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="training">
+          <div class="training-layout">
+            <article class="panel">
+              <div class="panel-head">
+                <h3>Training hinzufügen</h3>
+                <span id="injuryStatus">fit</span>
+              </div>
+              <form id="trainingForm" class="training-form">
+                <label>Einheit<select id="trainingType">
+                  <option>Schusstraining</option>
+                  <option>Stickhandling</option>
+                  <option>Krafttraining</option>
+                  <option>Sprinttraining</option>
+                  <option>Ausdauertraining</option>
+                  <option>Techniktraining</option>
+                  <option>Matchsimulation</option>
+                </select></label>
+                <label>Dauer in Minuten<input id="trainingMinutes" type="number" min="15" max="180" value="60" /></label>
+                <label>Intensität<select id="trainingIntensity">
+                  <option value="0.8">Locker</option>
+                  <option value="1" selected>Normal</option>
+                  <option value="1.25">Hart</option>
+                </select></label>
+                <button class="primary-button" type="submit">Training speichern</button>
+              </form>
+            </article>
+
+            <article class="panel">
+              <div class="panel-head">
+                <h3>Trainingsverlauf</h3>
+                <span id="trainingHours">0 h</span>
+              </div>
+              <div class="timeline" id="trainingLog"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="career">
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Karriere-Modus</h3>
+              <span id="careerStatus">Jugendspieler</span>
+            </div>
+            <div class="career-track" id="careerTrack"></div>
+            <div class="career-actions">
+              <button class="primary-button" id="promotionButton" type="button">KI-Aufstieg prüfen</button>
+              <button class="ghost-button" id="seasonButton" type="button">Saison abschließen</button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Erfolge</h3>
+              <span id="achievementCount">0</span>
+            </div>
+            <div class="achievement-grid" id="achievements"></div>
+          </div>
+        </section>
+
+        <section class="view" id="games">
+          <div class="game-grid">
+            <article class="panel game-sim">
+              <div class="panel-head">
+                <h3>Spielsimulation</h3>
+                <span id="seasonLabel">Saison 1</span>
+              </div>
+              <p class="report-text">Simuliere ein Spiel. Tore, Assists, Schüsse, Plus/Minus, Strafminuten und Eiszeit hängen von deinen Attributen, deiner Position und Form ab.</p>
+              <button class="primary-button" id="simulateGameButton" type="button">Spiel simulieren</button>
+            </article>
+
+            <article class="panel">
+              <div class="panel-head">
+                <h3>Letztes Spiel</h3>
+                <span id="gameResult">kein Spiel</span>
+              </div>
+              <div class="game-stats" id="lastGameStats"></div>
+            </article>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Saisonstatistik</h3>
+              <span id="seasonRecord">0 Spiele</span>
+            </div>
+            <div class="season-grid" id="seasonStats"></div>
+          </div>
+        </section>
+
+        <section class="view" id="stats">
+          <div class="charts-grid">
+            <article class="panel chart-panel">
+              <div class="panel-head">
+                <h3>Attributentwicklung</h3>
+                <span>Ø Gesamt</span>
+              </div>
+              <canvas id="attributeChart" width="600" height="280"></canvas>
+            </article>
+            <article class="panel chart-panel">
+              <div class="panel-head">
+                <h3>Tore & Assists</h3>
+                <span>Saison</span>
+              </div>
+              <canvas id="pointsChart" width="600" height="280"></canvas>
+            </article>
+            <article class="panel chart-panel">
+              <div class="panel-head">
+                <h3>Trainingsstunden</h3>
+                <span>Verlauf</span>
+              </div>
+              <canvas id="trainingChart" width="600" height="280"></canvas>
+            </article>
+            <article class="panel chart-panel">
+              <div class="panel-head">
+                <h3>Karrierefortschritt</h3>
+                <span id="careerPercent">0%</span>
+              </div>
+              <canvas id="careerChart" width="600" height="280"></canvas>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="calendar">
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Trainingskalender</h3>
+              <span id="weekGoal">Wochenziel</span>
+            </div>
+            <div class="calendar" id="calendarGrid"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Motivation & Events</h3>
+              <span>Coach Feed</span>
+            </div>
+            <div class="feed" id="eventFeed"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast" id="toast"></div>
+    <script src="app.js"></script>
+  </body>
+</html>

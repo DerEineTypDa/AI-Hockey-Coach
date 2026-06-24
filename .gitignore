@@ -1,0 +1,22 @@
+# Node
+node_modules/
+package-lock.json
+yarn.lock
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build & Dist
+dist/
+build/
+.env
+.env.local
+
+# Logs
+*.log
+npm-debug.log*
