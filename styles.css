@@ -1,0 +1,758 @@
+:root {
+  color-scheme: dark;
+  --bg: #071014;
+  --surface: rgba(13, 27, 34, 0.82);
+  --surface-strong: #10232c;
+  --line: rgba(197, 239, 255, 0.16);
+  --text: #ecfbff;
+  --muted: #96b6c0;
+  --ice: #baf4ff;
+  --blue: #38a8ff;
+  --deep-blue: #1673ff;
+  --cyan: #58f0ff;
+  --good: #66f2a2;
+  --warn: #ffd166;
+  --danger: #ff5d79;
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 80% 0%, rgba(56, 168, 255, 0.22), transparent 34%),
+    linear-gradient(130deg, #061014 0%, #0a1c25 46%, #071014 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(186, 244, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(186, 244, 255, 0.035) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, black, transparent 82%);
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  border: 0;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: 22px;
+  border-right: 1px solid var(--line);
+  background: rgba(4, 13, 17, 0.72);
+  backdrop-filter: blur(22px);
+  transition: transform 260ms ease;
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.brand-icon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(88, 240, 255, 0.45);
+  background: linear-gradient(145deg, rgba(56, 168, 255, 0.32), rgba(186, 244, 255, 0.12));
+  color: var(--ice);
+  font-weight: 900;
+  box-shadow: 0 0 24px rgba(88, 240, 255, 0.18);
+}
+
+.brand strong,
+.brand span {
+  display: block;
+}
+
+.brand strong {
+  font-size: 18px;
+}
+
+.brand span {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.nav {
+  display: grid;
+  gap: 8px;
+}
+
+.nav-item {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid transparent;
+  color: var(--muted);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: 180ms ease;
+}
+
+.nav-item:hover,
+.nav-item.active {
+  border-color: rgba(88, 240, 255, 0.26);
+  color: var(--text);
+  background: linear-gradient(90deg, rgba(56, 168, 255, 0.18), rgba(88, 240, 255, 0.05));
+  transform: translateX(4px);
+}
+
+.sidebar-card,
+.panel,
+.hero-panel {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.sidebar-card {
+  margin-top: 26px;
+  padding: 16px;
+}
+
+.label,
+.eyebrow {
+  color: var(--cyan);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.sidebar-card strong {
+  display: block;
+  margin: 8px 0;
+  font-size: 42px;
+  line-height: 1;
+}
+
+.mini-meter,
+.attribute-meter,
+.career-bar {
+  overflow: hidden;
+  height: 8px;
+  background: rgba(236, 251, 255, 0.1);
+}
+
+.mini-meter span,
+.attribute-meter span,
+.career-bar span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--deep-blue), var(--cyan));
+  transition: width 260ms ease;
+}
+
+.main {
+  min-width: 0;
+  width: 100%;
+  padding: 24px clamp(16px, 3vw, 36px) 44px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.topbar > div {
+  min-width: 0;
+}
+
+.topbar h1,
+.hero-panel h2,
+.panel h3 {
+  margin: 0;
+}
+
+.topbar h1 {
+  font-size: clamp(28px, 4vw, 46px);
+  line-height: 0.95;
+}
+
+.menu-button {
+  display: none;
+  width: 44px;
+  height: 44px;
+  color: var(--text);
+  background: var(--surface-strong);
+  cursor: pointer;
+}
+
+.top-actions,
+.career-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.primary-button,
+.ghost-button {
+  min-height: 42px;
+  padding: 0 16px;
+  color: var(--text);
+  cursor: pointer;
+  transition: 160ms ease;
+}
+
+.primary-button {
+  background: linear-gradient(135deg, var(--deep-blue), var(--cyan));
+  color: #031018;
+  font-weight: 900;
+}
+
+.ghost-button {
+  border: 1px solid var(--line);
+  background: rgba(236, 251, 255, 0.06);
+}
+
+.primary-button:hover,
+.ghost-button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+}
+
+.view {
+  display: none;
+  animation: viewIn 240ms ease;
+}
+
+.view.active {
+  display: block;
+}
+
+@keyframes viewIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-panel {
+  display: flex;
+  justify-content: space-between;
+  gap: 22px;
+  align-items: center;
+  min-height: 190px;
+  min-width: 0;
+  margin-bottom: 18px;
+  padding: clamp(20px, 4vw, 34px);
+  background:
+    linear-gradient(120deg, rgba(17, 41, 53, 0.92), rgba(9, 22, 29, 0.76)),
+    repeating-linear-gradient(0deg, transparent 0 20px, rgba(186, 244, 255, 0.035) 20px 21px);
+}
+
+.hero-panel h2 {
+  margin-top: 8px;
+  font-size: clamp(38px, 7vw, 76px);
+  line-height: 0.92;
+}
+
+.hero-panel p:last-child {
+  max-width: 780px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.hero-score {
+  width: 132px;
+  height: 132px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(88, 240, 255, 0.38);
+  background: rgba(88, 240, 255, 0.08);
+}
+
+.hero-score span,
+.hero-score strong {
+  display: block;
+}
+
+.hero-score strong {
+  font-size: 54px;
+}
+
+.dashboard-grid,
+.charts-grid,
+.game-grid,
+.training-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.panel {
+  padding: 18px;
+}
+
+.panel + .panel,
+.view > .panel + .panel {
+  margin-top: 16px;
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.panel-head h3 {
+  font-size: 18px;
+}
+
+.panel-head span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.summary-list,
+.season-grid,
+.game-stats {
+  display: grid;
+  gap: 10px;
+}
+
+.summary-item,
+.season-item,
+.game-stat,
+.goal-item,
+.timeline-item,
+.feed-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(236, 251, 255, 0.055);
+  border: 1px solid rgba(236, 251, 255, 0.08);
+  min-width: 0;
+}
+
+.summary-item strong,
+.season-item strong,
+.game-stat strong,
+.goal-item strong {
+  min-width: 0;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.summary-item span,
+.season-item span,
+.game-stat span {
+  color: var(--muted);
+}
+
+.goal-item.done {
+  border-color: rgba(102, 242, 162, 0.28);
+  color: var(--good);
+}
+
+.coach-advice {
+  display: grid;
+  gap: 10px;
+}
+
+.coach-card {
+  padding: 13px;
+  border-left: 3px solid var(--cyan);
+  background: rgba(88, 240, 255, 0.07);
+  color: #d8f9ff;
+  line-height: 1.45;
+}
+
+.report-text {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.attribute-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.attribute-row {
+  min-width: 0;
+}
+
+.attribute-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.attribute-meta strong {
+  color: var(--text);
+}
+
+.profile-form,
+.training-form {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+input,
+select {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  padding: 0 12px;
+  color: var(--text);
+  background: rgba(3, 13, 18, 0.72);
+  outline: none;
+}
+
+input:focus,
+select:focus {
+  border-color: rgba(88, 240, 255, 0.62);
+}
+
+.rating-layout {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+}
+
+.rating-circle {
+  width: 122px;
+  height: 122px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at center, #10232c 54%, transparent 55%),
+    conic-gradient(var(--cyan) 0deg, var(--deep-blue) 240deg, rgba(236, 251, 255, 0.1) 240deg);
+  font-size: 38px;
+  font-weight: 900;
+}
+
+.timeline {
+  display: grid;
+  gap: 10px;
+  max-height: 440px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.timeline-item {
+  align-items: center;
+}
+
+.timeline-item strong,
+.feed-item strong {
+  display: block;
+}
+
+.timeline-item span,
+.feed-item span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.career-track {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.career-step {
+  position: relative;
+  min-height: 96px;
+  padding: 12px;
+  border: 1px solid rgba(236, 251, 255, 0.12);
+  background: rgba(236, 251, 255, 0.045);
+}
+
+.career-step.reached {
+  border-color: rgba(88, 240, 255, 0.48);
+  background: rgba(56, 168, 255, 0.14);
+}
+
+.career-step.current {
+  box-shadow: inset 0 -3px 0 var(--cyan);
+}
+
+.career-step strong,
+.career-step span {
+  display: block;
+}
+
+.career-step span {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.career-actions {
+  margin-top: 16px;
+}
+
+.achievement-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.achievement {
+  min-height: 96px;
+  padding: 12px;
+  border: 1px solid rgba(236, 251, 255, 0.12);
+  background: rgba(236, 251, 255, 0.05);
+  color: var(--muted);
+}
+
+.achievement.unlocked {
+  color: var(--text);
+  border-color: rgba(102, 242, 162, 0.34);
+  background: rgba(102, 242, 162, 0.08);
+}
+
+.achievement strong,
+.achievement span {
+  display: block;
+}
+
+.achievement span {
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+.game-sim {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+}
+
+.charts-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.chart-panel canvas {
+  width: 100%;
+  height: 280px;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.calendar-day {
+  min-height: 120px;
+  padding: 10px;
+  border: 1px solid rgba(236, 251, 255, 0.1);
+  background: rgba(236, 251, 255, 0.045);
+}
+
+.calendar-day strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.calendar-day span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.feed {
+  display: grid;
+  gap: 10px;
+}
+
+.toast {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 30;
+  max-width: min(420px, calc(100vw - 36px));
+  padding: 14px 16px;
+  border-left: 3px solid var(--cyan);
+  background: rgba(7, 16, 20, 0.92);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  transform: translateY(18px);
+  opacity: 0;
+  pointer-events: none;
+  transition: 180ms ease;
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+@media (max-width: 1050px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: 0;
+    transform: translateX(-105%);
+    width: min(300px, 86vw);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .menu-button {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+  }
+
+  .dashboard-grid,
+  .charts-grid,
+  .game-grid,
+  .training-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .career-track,
+  .achievement-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .main {
+    padding: 16px 12px 32px;
+  }
+
+  .topbar {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .topbar .eyebrow {
+    display: none;
+  }
+
+  .topbar h1 {
+    font-size: 30px;
+  }
+
+  .top-actions {
+    display: none;
+  }
+
+  .hero-panel {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .hero-panel h2 {
+    font-size: clamp(34px, 14vw, 54px);
+  }
+
+  .hero-panel p:last-child {
+    font-size: 14px;
+    overflow-wrap: anywhere;
+  }
+
+  .panel-head,
+  .summary-item,
+  .season-item,
+  .game-stat,
+  .goal-item,
+  .timeline-item,
+  .feed-item {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .summary-item strong,
+  .season-item strong,
+  .game-stat strong,
+  .goal-item strong {
+    text-align: left;
+  }
+
+  .hero-score {
+    width: 96px;
+    height: 96px;
+  }
+
+  .hero-score strong {
+    font-size: 38px;
+  }
+
+  .attribute-grid,
+  .profile-form,
+  .training-form,
+  .rating-layout,
+  .calendar {
+    grid-template-columns: 1fr;
+  }
+
+  .calendar-day {
+    min-height: auto;
+  }
+}
